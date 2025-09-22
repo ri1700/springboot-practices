@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -33,8 +33,25 @@ public class ExApplication {	// Bootstrap Class
          * 5. ApplicationRunner 인터페이스를 구현한 빈을 Application Context에서 찾아서 실행
 		 */
 		
-		ApplicationContext applicationContext = SpringApplication.run(ExApplication.class, args);
-		System.out.println(applicationContext.getBean("myMap", Map.class).get("greeting"));
+		/*
+		ConfigurableApplicationContext ac = null;
+		try {
+			ac = SpringApplication.run(ExApplication.class, args);
+			System.out.println(ac.getBean("myMap", Map.class).get("greeting"));
+		} catch(Exception ex) {
+			
+		} finally {
+			ac.close();
+		}
+		*/
+		try(ConfigurableApplicationContext ac = SpringApplication.run(ExApplication.class, args)){
+			
+			System.out.println(ac.getBean("myMap", Map.class).get("greeting"));
+		
+		} catch(Exception ex) {
+			
+		}
+		
 	}
 
 }
