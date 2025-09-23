@@ -1,0 +1,15 @@
+# spring configuration
+spring:
+   application:
+      name: webmvc
+
+   mvc:
+      view:
+         prefix: /WEB-INF/views/
+         suffix: .jsp						
+
+# server configuration
+server:
+   port: 8088
+   servlet:
+      context-path: /webmvc
